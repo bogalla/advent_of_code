@@ -152,6 +152,7 @@ def part_two():
     same_coordinate_list = find_same_coordinates_part_two(list_wire_one, list_wire_two)
     return find_minimum(same_coordinate_list)
 
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # print(part_one())
