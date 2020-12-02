@@ -8,8 +8,9 @@ def find_answer(filename):
     print(numbers)
     for i in numbers:
         for j in numbers:
-            if i + j == 2020:
-                return i*j
+            for k in numbers:
+                if i + j + k == 2020:
+                    return i*j*k
 
 
 # Press the green button in the gutter to run the script.
