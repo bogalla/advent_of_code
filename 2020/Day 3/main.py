@@ -1,14 +1,15 @@
 def file_to_list(filename):
     file = open(filename, 'r')
     lines = file.readlines()
+    real_lines = []
     for line in lines:
-        print(repr(line))
-    return lines
+        real_lines.append(str.rstrip(line))
+    return real_lines
 
 
 def part_one():
     grid = file_to_list('input.txt')
-    length_of_grid = len(grid[0]) - 1
+    length_of_grid = len(grid[0])
     i = 1
     counter = 0
     pointer = 0
@@ -25,7 +26,7 @@ def part_two():
     list_of_increases = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
     answer_list = []
     grid = file_to_list('input.txt')
-    length_of_grid = len(grid[0]) - 1
+    length_of_grid = len(grid[0])
     print(length_of_grid)
     j = 0
     while j < len(list_of_increases):
@@ -58,20 +59,17 @@ def part_three():
     y = 0
     count = 0
     length = len(lines[322])
-    print("length: " + str(len(lines)))
-    print("length: " + str(length))
-    # part 1
     while y < len(lines):
-        if lines[y][x % (length -1)] == '#':
+        if lines[y][x % length] == '#':
             count += 1
         x += 3
         y += 1
 
-    print(count)
+    return count
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # print("final : " + str(part_one()))
+    print("final : " + str(part_one()))
     # print(part_two())
-    print(part_three())
+    # print(part_three())
