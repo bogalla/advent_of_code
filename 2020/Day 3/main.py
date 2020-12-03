@@ -1,24 +1,19 @@
 def file_to_list(filename):
     file = open(filename, 'r')
-    number_list = []
-    for x in file:
-        number_list.append(str(x))
-    return number_list
+    lines = file.readlines()
+    for line in lines:
+        print(repr(line))
+    return lines
 
 
 def part_one():
-    counter = 0
     grid = file_to_list('input.txt')
     length_of_grid = len(grid[0]) - 1
-    print(length_of_grid)
     i = 1
+    counter = 0
     pointer = 0
     while i < len(grid):
-        print("----------")
-        print(grid[i])
         pointer = (pointer + 3) % length_of_grid
-        print(pointer)
-        print(grid[i][pointer])
         if grid[i][pointer] == '#':
             counter += 1
         i += 1
@@ -34,25 +29,18 @@ def part_two():
     print(length_of_grid)
     j = 0
     while j < len(list_of_increases):
-        print("==================\n\n\n\n\n\n\n=====================")
         counter = 0
-        print(list_of_increases[j])
         right = list_of_increases[j][0]
         down = list_of_increases[j][1]
         i = down
         pointer = 0
         while i < len(grid):
-            print("----------")
-            print(grid[i])
             pointer = (pointer + right) % length_of_grid
-            print(pointer)
-            print(grid[i][pointer])
             if grid[i][pointer] == '#':
                 counter += 1
             i += down
         answer_list.append(counter)
         j += 1
-    print(answer_list)
     return multiply(answer_list)
 
 
@@ -63,7 +51,27 @@ def multiply(answer_list):
     return counter
 
 
+def part_three():
+    lines = file_to_list('input.txt')
+
+    x = 0
+    y = 0
+    count = 0
+    length = len(lines[322])
+    print("length: " + str(len(lines)))
+    print("length: " + str(length))
+    # part 1
+    while y < len(lines):
+        if lines[y][x % (length -1)] == '#':
+            count += 1
+        x += 3
+        y += 1
+
+    print(count)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # print("final : " + str(part_one()))
-    print(part_two())
+    # print(part_two())
+    print(part_three())
