@@ -8,7 +8,7 @@ def file_to_list(filename):
 
 
 def part_one():
-    numbers = file_to_list('input.txt')
+    numbers = file_to_list('input.txt.txt')
     return calculate_output(numbers)
 
 
