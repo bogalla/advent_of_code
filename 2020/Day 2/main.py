@@ -31,9 +31,7 @@ def part_two():
         special_letter = entry[space_index+1:colon_index]
         string_to_examine = entry[colon_index+2:]
         if string_to_examine[int(first_num)-1] == special_letter or string_to_examine[int(second_num)-1] == special_letter:
-            if string_to_examine[int(first_num)-1] == special_letter and string_to_examine[int(second_num)-1] == special_letter:
-                print("")
-            else:
+            if not (string_to_examine[int(first_num)-1] == special_letter and string_to_examine[int(second_num)-1] == special_letter):
                 valid_entries += 1
     return valid_entries
 
