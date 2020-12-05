@@ -7,57 +7,31 @@ def file_to_list(filename):
     return [line.strip().replace('\n', ' ') for line in open("input.txt").read().split('\n\n')]
 
 
-def validate_byr(passport):
-    if "byr" not in passport:
-        return bool(False)
-    cut_string = passport[passport.index("byr"):]
-    cut_string_2 = cut_string[:cut_string.index(" ")]
-    number = int(cut_string_2[4:])
-    if 1920 <= number <= 2002:
-        return bool(True)
-    return bool(False)
+def validate_byr(number):
+    return 1920 <= number <= 2002
 
 
-def validate_iyr(passport):
-    if "iyr" not in passport:
-        return bool(False)
-    cut_string = passport[passport.index("iyr"):]
-    cut_string_2 = cut_string[:cut_string.index(" ")]
-    number = int(cut_string_2[4:])
-    if 2010 <= number <= 2020:
-        return bool(True)
-    return bool(False)
+def validate_iyr(number):
+    return 2010 <= number <= 2020
 
 
-def validate_eyr(passport):
-    if "eyr" not in passport:
-        return bool(False)
-    cut_string = passport[passport.index("eyr"):]
-    cut_string_2 = cut_string[:cut_string.index(" ")]
-    number = int(cut_string_2[4:])
-    if 2020 <= number <= 2030:
-        return bool(True)
-    return bool(False)
+def validate_eyr(number):
+    return 2020 <= number <= 2030
 
 
 def validate_hgt(passport):
-    cut_string = passport[passport.index("hgt"):]
-    cut_string_2 = cut_string[:cut_string.index(" ")]
-    number = int(cut_string_2[4:len(cut_string_2) - 2])
-    if "cm" in cut_string_2:
-        if 150 <= number <= 193:
+    height = int(passport[:len(passport)-2])
+    if "cm" in passport:
+        if 150 <= height <= 193:
             return bool(True)
-    elif "in" in cut_string_2:
-        if 59 <= number <= 76:
+    elif "in" in passport:
+        if 59 <= height <= 76:
             return bool(True)
     return bool(False)
 
 
 def validate_hcl(number):
-    x = re.search("^\#[a-zA-Z0-9]{6}$", number)
-    if x:
-        return bool(True)
-    return bool(False)
+    return re.search("^\#[a-zA-Z0-9]{6}$", number)
 
 
 def validate_ecl(color):
@@ -67,10 +41,7 @@ def validate_ecl(color):
 
 
 def validate_pid(number):
-    x = re.search("^\d{9}$", number)
-    if x:
-        return bool(True)
-    return bool(False)
+    return re.search("^\d{9}$", number)
 
 
 def part_two():
@@ -83,10 +54,10 @@ def part_two():
             details[x] = y
         details["cid"] = 0
         details.pop("cid")
-        print(str(details))
+        # print(str(details))
         if len(details) != 7:
             continue
-        if validate_byr(details["byr"]) and validate_iyr(details["iyr"]) and validate_eyr(details["eyr"])\
+        if validate_byr(int(details["byr"])) and validate_iyr(int(details["iyr"])) and validate_eyr(int(details["eyr"]))\
                 and validate_hgt(details["hgt"]) and validate_hcl(details["hcl"])\
                 and validate_ecl(details["ecl"]) and validate_pid(details["pid"]):
             counter += 1
@@ -106,6 +77,6 @@ def part_one():
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    # print("final : " + str(part_one()))
+    print("final : " + str(part_one()))
     print("final : " + str(part_two()))
     # print(part_three())
