@@ -20,6 +20,7 @@ def part_one():
             elif entry[i] == 'B':
                 lower_bound = math.ceil(midpoint)
             i += 1
+        # upper bound and lower bound are the same here
         row = upper_bound
         lower_bound = 0
         upper_bound = 7
@@ -30,6 +31,7 @@ def part_one():
             elif entry[i] == 'R':
                 lower_bound = math.ceil(midpoint)
             i += 1
+        # upper bound and lower bound are the same here
         seat = upper_bound
         final_list.append((row*8)+seat)
     return sorted(final_list)
