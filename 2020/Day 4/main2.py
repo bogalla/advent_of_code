@@ -5,9 +5,9 @@ if __name__ == '__main__':
     part2 = 0
 
     inputs = [line.strip().replace('\n', ' ') for line in open("input.txt").read().split('\n\n')]
-    required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
+    print("1 : " + str(inputs))
     for passport in inputs:
-        details = {}
+        details = dict()
         for detail in passport.split():
             key, value = detail.split(":")
             details[key] = value
@@ -16,6 +16,7 @@ if __name__ == '__main__':
         if len(details) == 7:
             part1 += 1
         else:
+            # doesnt have all the correct things, pass. not good for part 1 or 2
             continue
         byr = int(details['byr'])
         iyr = int(details['iyr'])
