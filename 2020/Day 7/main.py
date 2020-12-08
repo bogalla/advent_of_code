@@ -1,7 +1,7 @@
 from anytree import Node, RenderTree
 
 
-visited = []  # List to keep track of visited nodes.
+  # List to keep track of visited nodes.
 queue = []
 
 
@@ -12,51 +12,43 @@ def file_to_list(filename):
 
 def part_one():
     input_list = file_to_list("input.txt")
-    hashtable = dict()
-    counter = 0
+    hashmap = dict()
     for line in input_list:
-        parent_bag = line[:line.index(" contain ")-1]
-        print("parent : " + parent_bag)
-        rest = line[line.index("contain") + 10:]
-        print("rest : " + rest)
-        child_bag_1 = ""
-        child_bag_2 = ""
-        if "," in rest:
-            child_bag_1 = rest[: rest.index(",")]
-            if child_bag_1[len(child_bag_1)-1] == 's':
-                child_bag_1 = child_bag_1[:len(child_bag_1)-1]
-            child_bag_2 = rest[rest.index(',')+4:rest.index(".")]
-        else:
-            child_bag_2 = rest[:len(rest)-1]
-        if child_bag_2[len(child_bag_2) - 1] == 's':
-            child_bag_2 = child_bag_2[:len(child_bag_2) - 1]
-        print("child 1 : " + child_bag_1)
-        print("child 2 : " + child_bag_2)
-        if child_bag_2 == ' other bag':
-            hashtable[parent_bag] = []
-        else:
-            hashtable[parent_bag] = [child_bag_1, child_bag_2]
-    print(hashtable)
-    return(bfs(visited, hashtable, 'shiny gold bag'))
+        line_spaced = line.split(" ")
+        print(line_spaced)
+        parent = line_spaced[0] + line_spaced[1] + line_spaced[2][:-1]
+        print("parent : " + parent)
+        i = 5
+        child_list = []
+        while i < len(line_spaced):
+            if line_spaced[i] == "other":
+                child = str("")
+            else:
+                child = remove_s(line_spaced[i] + line_spaced[i + 1] + line_spaced[i + 2][:-1])
+            print("child : " + str(child))
+            if child != "":
+                child_list.append(child)
+            i += 4
+        hashmap[parent] = child_list
+    final_num = sum(['shinygoldbag' in recursive_search(key, hashmap) for key in hashmap.keys()])
+    print(hashmap)
+    return final_num
 
 
-def bfs(visited, graph, node):
-    listi = []
-    visited.append(node)
-    queue.append(node)
+def remove_s(word):
+    if word[-1:] == "s":
+        return word[:-1]
+    return word
 
-    while queue:
-        s = queue.pop(0)
-        print(1, end = " ")
-        listi.append("1")
 
-        for neighbour in graph[s]:
-            if neighbour not in visited:
-                visited.append(neighbour)
-                queue.append(neighbour)
-    return len(listi)
+def recursive_search(key, hashmap):
+    answer_set = set()
+    for value in hashmap[key]:
+        answer_set.add(value)
+        answer_set.update(recursive_search(value,hashmap))
+    return answer_set
 
 
 if __name__ == '__main__':
-    print("final : " + str(part_one()))
-    # print("final : " + str(part_two()))
+    # print("final : " + str(part_one()))
+    print("final : " + str(part_two()))
