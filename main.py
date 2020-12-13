@@ -4,8 +4,7 @@ def file_to_list(filename):
 
 
 def part_one():
-    input = file_to_list("input.txt")
-    print(input)
+    inputs = file_to_list("input.txt")
 
 
 if __name__ == '__main__':
