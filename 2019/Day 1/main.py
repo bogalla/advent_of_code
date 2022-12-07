@@ -28,5 +28,6 @@ def file_to_list(filename):
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     numbers = file_to_list('input.txt')
+    print(numbers)
     print(part_one())
     print(part_two())
