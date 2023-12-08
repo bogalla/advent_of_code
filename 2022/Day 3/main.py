@@ -4,7 +4,7 @@ def file_to_list(filename):
 
 # rock = A, X, 1 point. paper = B, Y, 2 points. scissors = C, Z, 3 points.
 def part_one():
-    inputs = file_to_list("input.txt")
+    inputs = file_to_list("input_t.txt")
     print(inputs)
     letters = []
     for ruck in inputs:
@@ -48,5 +48,5 @@ def part_two():
 
 
 if __name__ == '__main__':
-    # print("final : " + str(part_one()))
-    print("final : " + str(part_two()))
+    print("final : " + str(part_one()))
+    # print("final : " + str(part_two()))
