@@ -39,7 +39,35 @@ def part_one():
         print("-------------------------")
     return sum
 
+def part_two():
+    inputs = file_to_list("input.txt")
+    print(inputs)
+    sum = 0
+    for line in inputs:
+        line = line[line.find(':') + 1:]
+        games = line.split(';')
+        redList = []
+        blueList = []
+        greenList = []
+        print(games)
+        for game in games:
+            insts = game.split(',')
+            print(insts)
+            for inst in insts:
+                num = int(re.findall(r'\d+', inst)[0])
+                if "red" in inst:
+                    redList.append(num)
+                if "blue" in inst:
+                    blueList.append(num)
+                if "green" in inst:
+                    greenList.append(num)
 
+        print(max(redList))
+        print(max(blueList))
+        print(max(greenList))
+        sum += max(redList) * max(blueList) * max(greenList)
+        print("-------------------------")
+    return sum
 if __name__ == '__main__':
-    print("final : " + str(part_one()))
-    # print("final : " + str(part_two()))
+    # print("final : " + str(part_one()))
+    print("final : " + str(part_two()))
